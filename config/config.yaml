@@ -1,0 +1,86 @@
+# Dataset Configuration
+dataset:
+  train_path: '/home/coder/mohammed.alam/_dehazing/~dataset/processed/'
+  val_path: '/home/coder/mohammed.alam/_dehazing/~dataset/processed/'
+  test_path: '/home/coder/mohammed.alam/_dehazing/~dataset/processed/'
+  img_size: 256
+  batch_size: 16
+  num_workers: 4
+  augmentation: True
+
+# Fog Intensity Classifier
+classifier:
+  model: 'resnet18'  # Options: resnet18, resnet34, efficientnet_b0
+  pretrained: True
+  num_classes: 3  # Low, Medium, High
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  epochs: 20
+  checkpoint_dir: 'checkpoints/classifier'
+
+# Dehazing Models
+dehazing:
+  # Common parameters
+  base_channels: 64
+  checkpoint_dir: 'checkpoints/dehazing'
+  
+  # Low intensity model
+  low:
+    model_type: 'lightweight'  # A lightweight version
+    channels: 32
+    blocks: 3
+    learning_rate: 0.0001
+    
+  # Medium intensity model
+  medium:
+    model_type: 'standard'  # Standard model
+    channels: 64
+    blocks: 6
+    learning_rate: 0.0001
+    
+  # High intensity model
+  high:
+    model_type: 'complex'  # Complex model with attention
+    channels: 96
+    blocks: 9
+    attention: True
+    learning_rate: 0.0001
+
+# Routing Mechanism
+routing:
+  type: 'soft'  # Options: 'hard', 'soft', 'gated'
+  temperature: 0.5  # For soft routing
+  checkpoint_dir: 'checkpoints/routing'
+
+# Joint Training
+joint_training:
+  learning_rate: 0.00005
+  epochs: 50
+  lambda_dehazing: 1.0
+  lambda_classification: 0.2
+  lambda_perceptual: 0.1
+  lambda_detection: 0.5
+  checkpoint_dir: 'checkpoints/joint'
+
+# Object Detection
+detection:
+  model: 'faster_rcnn_resnet50_fpn'  # Options: faster_rcnn, yolov5
+  pretrained: True
+  fine_tune: True
+  learning_rate: 0.00001
+  weight_decay: 0.0001
+  checkpoint_dir: 'checkpoints/detection'
+
+# Evaluation
+evaluation:
+  annotation_paths:
+    low: "/home/coder/mohammed.alam/_dehazing/~dataset/processed/annotations/low/instances.json"
+    medium: "/home/coder/mohammed.alam/_dehazing/~dataset/processed/annotations/medium/instances.json"
+    high: "/home/coder/mohammed.alam/_dehazing/~dataset/processed/annotations/high/instances.json"
+  metrics: ['psnr', 'ssim', 'lpips', 'mAP']
+  visualization_dir: 'results/visualizations'
+  results_dir: 'results/metrics'
+
+# Hardware
+device: 'cuda:1'  # Options: 'cuda', 'cpu'
+seed: 42
