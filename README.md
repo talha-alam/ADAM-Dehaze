@@ -27,7 +27,7 @@ The framework consists of the following components:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/adaptive-dehazing.git
+git clone https://github.com/talha-alam/adaptive-dehazing.git
 cd adaptive-dehazing
 
 # Create and activate a conda environment
