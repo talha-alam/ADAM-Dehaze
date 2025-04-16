@@ -12,7 +12,7 @@ This repository contains the implementation of an adaptive fog intensity-aware d
 
 ## Architecture Overview
 
-![Architecture Diagram](docs/architecture.png)
+![Architecture Diagram](architecture.png)
 
 The framework consists of the following components:
 1. **Fog Intensity Classifier**: A CNN-based classifier that categorizes input images.
