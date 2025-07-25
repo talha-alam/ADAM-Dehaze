@@ -42,77 +42,109 @@ The framework consists of:
 
 ## 🚀 Quick Start
 
-### Installation
+## Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/adam-dehaze.git
-cd adam-dehaze
+git clone https://github.com/talha-alam/adaptive-dehazing.git
+cd adaptive-dehazing
 
-# Create and activate conda environment
-conda create -n adam-dehaze python=3.8
-conda activate adam-dehaze
+# Create and activate a conda environment
+conda create -n dehazing python=3.8
+conda activate dehazing
 
-# Install dependencies
+# Install requirements
 pip install -r requirements.txt
 
 # Install PyTorch with CUDA support
 pip install torch==1.12.0+cu113 torchvision==0.13.0+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
 ```
 
-### Dataset Preparation
+## Dataset Preparation
 
-#### FogIntensity-25K Dataset Structure
+The framework is designed to work with a dataset containing hazy images, dehazed counterparts (from the CORUN method), and ground truth clear images.
+
+### Expected Dataset Structure
+
 ```
 dataset/
 ├── raw/
-│   ├── light/      # β=0.03, 8,333 images
-│   ├── medium/     # β=0.06, 8,333 images  
-│   └── heavy/      # β=0.09, 8,334 images
-└── processed/
+│   ├── low/
+│   │   ├── hazy/
+│   │   ├── clear/
+│   │   └── dehazed/
+│   ├── medium/
+│   │   ├── hazy/
+│   │   ├── clear/
+│   │   └── dehazed/
+│   └── high/
+│       ├── hazy/
+│       ├── clear/
+│       └── dehazed/
+└── processed/  # Will be created by preprocessing script
     ├── train/
     ├── val/
     └── test/
 ```
 
-#### Preprocessing
+### Preprocessing
+
 ```bash
-# Preprocess the FogIntensity-25K dataset
+# Preprocess the dataset (resize, normalize, and split into train/val/test)
 python main.py --mode preprocess --data_dir path/to/dataset
 ```
 
-### Training
+## Configuration
 
-#### Step-by-Step Training
+The `config/config.yaml` file contains all configuration parameters:
+
+- Dataset paths and parameters
+- Model architectures and hyperparameters
+- Training settings
+- Evaluation metrics
+
+Modify this file to customize the framework to your needs.
+
+## Training
+
+### Step-by-Step Training
+
 ```bash
-# 1. Train the HDEN fog intensity classifier
+# 1. Train the fog intensity classifier
 python main.py --mode train_classifier
 
-# 2. Train individual CORUN dehazing branches
+# 2. Train individual dehazing models
 python main.py --mode train_dehazing
 
-# 3. Train the joint adaptive model
+# 3. Train the joint model
 python main.py --mode train_joint
 ```
 
-#### Complete Training Pipeline
+### Complete Training Pipeline
+
 ```bash
 # Run the complete training pipeline
 python main.py --mode train_all
 ```
 
-### Evaluation
+## Evaluation
 
 ```bash
-# Run comprehensive evaluation on Cityscapes and RTTS
+# Run comprehensive evaluation
 python main.py --mode evaluate
 ```
 
-### Demo
+This will:
+1. Evaluate baseline models on their respective fog intensities
+2. Evaluate the joint adaptive model
+3. Assess object detection performance on hazy vs. dehazed images
+4. Generate visualizations and comparison charts
+
+## Demo
 
 ```bash
-# Run demo with pretrained models
-python main.py --mode demo --input_path path/to/foggy/images
+# Run a demo with pretrained models
+python main.py --mode demo
 ```
 
 ## 📊 Experimental Results
@@ -192,33 +224,6 @@ training:
 |---------------|-----------|------|---------|
 | **Full Model (w/ CPMM)** | **23.95** | **0.9188** | **75.0** |
 | w/o CPMM | 22.50 | 0.8992 | 71.4 |
-
-## 🏗️ Code Structure
-
-```
-adam_dehaze/
-├── config/              # Configuration files
-│   └── config.yaml      # Main configuration
-├── data/                # Data loading and preprocessing
-│   ├── dataset.py       # FogIntensity-25K dataset loader
-│   └── transforms.py    # Data augmentation
-├── models/              # Neural network architectures
-│   ├── hden.py          # Haze Density Estimation Network
-│   ├── corun.py         # CORUN dehazing variants
-│   ├── routing.py       # Adaptive routing mechanism
-│   └── detection.py     # YOLOv8 integration
-├── training/            # Training procedures
-│   ├── trainer.py       # Main training loop
-│   └── losses.py        # Adaptive loss functions
-├── evaluation/          # Evaluation metrics and procedures
-│   ├── metrics.py       # PSNR, SSIM, FADE, etc.
-│   └── detection_eval.py # Object detection evaluation
-├── utils/               # Utility functions
-│   ├── fog_synthesis.py # Atmospheric scattering model
-│   └── visualization.py # Result visualization
-├── main.py              # Main entry point
-└── requirements.txt     # Dependencies
-```
 
 ## 🔬 FogIntensity-25K Dataset
 
