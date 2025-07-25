@@ -175,6 +175,8 @@ python main.py --mode demo
 | CORUN-Complex | 50ms | 150G | Dense fog (β>0.06) |
 | **Adaptive Average** | **30ms** | **92G** | **20% faster than fixed** |
 
+![Object-Detection-Results](object_detect.png)
+
 ## Code Structure
 
 ```
@@ -217,6 +219,8 @@ We introduce and will release **FogIntensity-25K**, a comprehensive synthetic da
 - **Three fog intensities**: Light (β=0.03), Medium (β=0.06), Heavy (β=0.09)
 - **Depth-aware fog synthesis** using atmospheric scattering model
 - **Object detection annotations** for downstream task evaluation
+
+![FogIntensity-25K Dataset](dataset.jpeg)
 
 ### Dataset Composition
 | Fog Level | β Value | Images | Description |
