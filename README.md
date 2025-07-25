@@ -175,8 +175,6 @@ python main.py --mode demo
 | CORUN-Complex | 50ms | 150G | Dense fog (β>0.06) |
 | **Adaptive Average** | **30ms** | **92G** | **20% faster than fixed** |
 
-![Object-Detection-Results](object_detect.png)
-
 ## Code Structure
 
 ```
