@@ -185,28 +185,22 @@ python main.py --mode demo
 | CORUN-Complex | 50ms | 150G | Dense fog (β>0.06) |
 | **Adaptive Average** | **30ms** | **92G** | **20% faster than fixed** |
 
-## 🔧 Configuration
+## Code Structure
 
-The framework is highly configurable through `config/config.yaml`:
-
-```yaml
-# Fog intensity thresholds
-fog_thresholds:
-  light_threshold: 0.03    # α parameter
-  medium_threshold: 0.06   # β parameter
-
-# Adaptive loss weights
-loss_weights:
-  light_coherence: 0.3     # γ(d) for light fog
-  medium_coherence: 0.6    # γ(d) for medium fog  
-  heavy_coherence: 0.9     # γ(d) for heavy fog
-
-# Training parameters
-training:
-  batch_size: 16
-  learning_rate: 2e-4
-  epochs: 100
-  weight_decay: 1e-4
+```
+adaptive_dehazing/
+├── config/              # Configuration files
+├── data/                # Data loading and preprocessing
+├── models/              # Neural network architectures
+│   ├── classifier.py    # Fog intensity classifier
+│   ├── dehazing/        # Dehazing models
+│   ├── routing.py       # Routing mechanism
+│   └── detection.py     # Object detection integration
+├── training/            # Training procedures
+├── evaluation/          # Evaluation metrics and procedures
+├── utils/               # Utility functions
+├── main.py              # Main script
+└── requirements.txt     # Dependencies
 ```
 
 ## 📈 Ablation Studies
