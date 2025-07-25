@@ -46,7 +46,7 @@ The framework consists of:
 
 ```bash
 # Clone the repository
-git clone https://github.com/talha-alam/adaptive-dehazing.git
+git clone https://github.com/talha-alam/ADAM-Dehaze.git
 cd adaptive-dehazing
 
 # Create and activate a conda environment
