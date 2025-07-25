@@ -34,9 +34,9 @@ Adverse weather conditions, particularly fog, pose a significant challenge to au
 The framework consists of:
 1. **Haze Density Estimation Network (HDEN)**: DenseNet121-based classifier achieving 99.80% accuracy
 2. **Specialized Dehazing Networks**:
-   - **Light (β=0.03)**: 2-stage CORUN for efficient processing (18ms, 45G FLOPs)
-   - **Medium (β=0.06)**: 4-stage CORUN balancing quality and speed (38ms, 80G FLOPs)  
-   - **Complex (β=0.09)**: 6-stage CORUN with attention for dense fog (50ms, 150G FLOPs)
+   - **Light (β=0.03)**: 2-stage CORUN for efficient processing
+   - **Medium (β=0.06)**: 4-stage CORUN balancing quality and speed
+   - **Complex (β=0.09)**: 6-stage CORUN with attention for dense fog
 3. **Adaptive Loss**: Density-weighted combination of coherence, perceptual, and density terms
 4. **Object Detection Integration**: YOLOv8n fine-tuned on dehazed outputs
 
@@ -69,7 +69,7 @@ The framework is designed to work with a dataset containing hazy images, dehazed
 ```
 dataset/
 ├── raw/
-│   ├── low/
+│   ├── light/
 │   │   ├── hazy/
 │   │   ├── clear/
 │   │   └── dehazed/
@@ -77,7 +77,7 @@ dataset/
 │   │   ├── hazy/
 │   │   ├── clear/
 │   │   └── dehazed/
-│   └── high/
+│   └── complex/
 │       ├── hazy/
 │       ├── clear/
 │       └── dehazed/
@@ -165,16 +165,6 @@ python main.py --mode demo
 | RIDCP | 0.944 | 17.293 | 4.965 | 55.0 |
 | PSD | 0.920 | 27.713 | 4.598 | 51.0 |
 | **ADAM-Dehaze** | **0.828** | **11.961** | **5.346** | **56.0** |
-
-### Object Detection Performance Improvement
-
-| Object Class | mAP Improvement |
-|--------------|-----------------|
-| Bicycle | **59.0%** (+7%) |
-| Car | **67.0%** (+4%) |
-| Motor | **48.0%** (+6%) |
-| Person | **77.0%** (+3%) |
-| **Average** | **56.0%** (+5%) |
 
 ### Computational Efficiency
 
