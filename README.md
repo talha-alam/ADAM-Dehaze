@@ -60,33 +60,6 @@ pip install -r requirements.txt
 pip install torch==1.12.0+cu113 torchvision==0.13.0+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
 ```
 
-## Dataset Preparation
-
-The framework is designed to work with a dataset containing hazy images, dehazed counterparts (from the CORUN method), and ground truth clear images.
-
-### Expected Dataset Structure
-
-```
-dataset/
-├── raw/
-│   ├── light/
-│   │   ├── hazy/
-│   │   ├── clear/
-│   │   └── dehazed/
-│   ├── medium/
-│   │   ├── hazy/
-│   │   ├── clear/
-│   │   └── dehazed/
-│   └── complex/
-│       ├── hazy/
-│       ├── clear/
-│       └── dehazed/
-└── processed/  # Will be created by preprocessing script
-    ├── train/
-    ├── val/
-    └── test/
-```
-
 ### Preprocessing
 
 ```bash
