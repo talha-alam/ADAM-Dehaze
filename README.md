@@ -1,6 +1,6 @@
 # ADAM-Dehaze: Adaptive Density-Aware Multi-Stage Dehazing for Improved Object Detection in Foggy Conditions
 
-[![Paper](https://img.shields.io/badge/Paper-SMC%202025-red)](https://arxiv.org/abs/2506.15837)
+[![Paper](https://img.shields.io/badge/Paper-ArXiv-red)](https://arxiv.org/abs/2506.15837)
 [![Code](https://img.shields.io/badge/Code-Available-green)](https://github.com/your-repo/adam-dehaze)
 [![Dataset](https://img.shields.io/badge/Dataset-FogIntensity--25K-blue)](https://github.com/your-repo/adam-dehaze)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
